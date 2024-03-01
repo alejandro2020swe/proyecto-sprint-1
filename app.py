@@ -8,6 +8,9 @@ df = pd.read_csv('corazon.csv')
 st.title('Análisis de Datos de Enfermedades Cardíacas')
 st.write('Esta aplicación analiza datos de enfermedades cardíacas.')
 
+st.image('cora.jpg', use_column_width=True)
+
+
 # Mostrar un encabezado con texto
 st.header('Datos de la Enfermedad Cardíaca')
 
