@@ -14,9 +14,7 @@ st.header('Datos de la Enfermedad Cardíaca')
 # Mostrar una descripción breve
 st.write('Los datos contienen información sobre pacientes con enfermedades cardíacas.')
 
-# Mostrar los datos cargados
-st.subheader('Datos')
-st.write(df)
+
 
 # Botón para abrir el histograma de edad
 if st.button('Ver Histograma de Edad'):
