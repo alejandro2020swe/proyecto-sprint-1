@@ -2,37 +2,33 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-car_data = pd.read_csv('vehicles_us.csv')
+data = pd.read_csv('corazon.csv')
 
-# Creación contenido de nuestra aplicación basada en Streamlit.
-# Encabezado con texto
-st.header("Análisis de Anuncios de Venta de Vehículos")
+# Configurar la aplicación Streamlit
+st.title('Análisis de Datos de Enfermedades Cardíacas')
+st.write('Esta aplicación analiza datos de enfermedades cardíacas.')
 
-# Botón para mostrar u ocultar el histograma de condición vs. modelo
-show_histogram_button = st.button("Histograma de Condición vs. Modelo")
+# Mostrar un encabezado con texto
+st.header('Datos de la Enfermedad Cardíaca')
 
-# Checkbox para seleccionar el modelo del auto en el gráfico de dispersión
-show_scatter_checkbox = st.checkbox("Gráfico de Dispersión de Precio vs. Año del Modelo por modelo del auto")
+# Mostrar una descripción breve
+st.write('Los datos contienen información sobre pacientes con enfermedades cardíacas.')
 
-# Lista de modelos de automóviles
-car_models = car_data['model'].unique()
+# Mostrar los datos cargados
+st.subheader('Datos')
+st.write(data)
 
-# Función para construir el histograma de condición vs. modelo
-def build_histogram():
-    fig = px.histogram(car_data, x="model", color="condition", title="Histograma de Condición vs. Modelo")
-    st.plotly_chart(fig, use_container_width=True)
+# Mostrar un histograma de la edad
+st.subheader('Histograma de Edad')
+fig_hist = px.histogram(data, x='Age', title='Distribución de Edad')
+st.plotly_chart(fig_hist)
 
-# Función para construir el gráfico de dispersión de precio vs. año del modelo
-def build_scatter():
-    selected_model = st.selectbox("Seleccionar modelo de automóvil", car_models)
-    filtered_data = car_data[car_data['model'] == selected_model]
-    fig = px.scatter(filtered_data, x="model_year", y="price", title=f"Gráfico de Dispersión de Precio vs. Año del Modelo para {selected_model}")
-    st.plotly_chart(fig, use_container_width=True)
+# Mostrar un gráfico de dispersión de colesterol vs. presión arterial en reposo
+st.subheader('Gráfico de Dispersión de Colesterol vs. Presión Arterial en Reposo')
+fig_scatter = px.scatter(data, x='RestingBP', y='Cholesterol', color='HeartDisease', title='Colesterol vs. Presión Arterial en Reposo')
+st.plotly_chart(fig_scatter)
 
-# Verificación si se hace clic en el botón y mostrar el histograma
-if show_histogram_button:
-    build_histogram()
-
-# Verificación si el checkbox está seleccionado y mostrar el gráfico de dispersión
-if show_scatter_checkbox:
-    build_scatter()
+# Agregar un botón de casilla de verificación para mostrar/ocultar los datos
+if st.checkbox('Mostrar/Ocultar Datos'):
+    st.subheader('Datos Detallados')
+    st.write(data)
