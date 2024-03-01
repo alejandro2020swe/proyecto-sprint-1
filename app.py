@@ -2,7 +2,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-data = pd.read_csv('tus_datos.csv')
+data = pd.read_csv('corazon.csv')
 
 # Configurar la aplicación Streamlit
 st.title('Análisis de Datos de Enfermedades Cardíacas')
